@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 
 export default function AddFriend({ onAddFriend }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("https://i.pravatar.cc/48");
 
