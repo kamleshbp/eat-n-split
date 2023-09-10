@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import BillForm from "./components/BillForm";
+import FriendList from "./components/FriendList";
 
-function App() {
+const initialFriends = [
+  {
+    name: "Clark",
+    balance: 7,
+    imageUrl: "https://i.pravatar.cc/48",
+  },
+  {
+    name: "Sarah",
+    balance: -20,
+    imageUrl: "https://i.pravatar.cc/49",
+  },
+  {
+    name: "Anthony",
+    balance: 0,
+    imageUrl: "https://i.pravatar.cc/50",
+  },
+];
+
+export default function App() {
+  const [friends, setFriends] = useState(initialFriends);
+  const [openFriend, setOpenFriend] = useState(null);
+
+  function addFriend(friend) {
+    setFriends([...friends, friend]);
+  }
+
+  function updateBalance(id, balance) {
+    setFriends(
+      friends.map((friend, i) =>
+        i === id ? { ...friend, balance: friend.balance + balance } : friend
+      )
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <FriendList
+        openFriend={openFriend}
+        onOpenFriend={setOpenFriend}
+        friends={friends}
+        onAddFriend={addFriend}
+      />
+      {openFriend !== null && (
+        <BillForm
+          friends={friends}
+          openFriend={openFriend}
+          onOpenFriend={setOpenFriend}
+          updateBalance={updateBalance}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
