@@ -4,19 +4,22 @@ import FriendList from "./components/FriendList";
 
 const initialFriends = [
   {
-    name: "Clark",
+    id: "85c94783-fc2b-407d-891b-0b040f21c35c",
+    name: "Nirma",
     balance: 7,
-    imageUrl: "https://i.pravatar.cc/48",
+    imageUrl: "https://i.pravatar.cc/48?85c94783-fc2b-407d-891b-0b040f21c35c",
   },
   {
-    name: "Sarah",
+    id: "c6c94097-9632-4b15-9be2-fbcb59abfbdc",
+    name: "Harsh",
     balance: -20,
-    imageUrl: "https://i.pravatar.cc/49",
+    imageUrl: "https://i.pravatar.cc/48?c6c94097-9632-4b15-9be2-fbcb59abfbdc",
   },
   {
-    name: "Anthony",
+    id: "65facf9c-faa6-4179-8573-36edf8cb1bf4",
+    name: "Dhruv",
     balance: 0,
-    imageUrl: "https://i.pravatar.cc/50",
+    imageUrl: "https://i.pravatar.cc/48?65facf9c-faa6-4179-8573-36edf8cb1bf4",
   },
 ];
 
@@ -28,10 +31,12 @@ export default function App() {
     setFriends([...friends, friend]);
   }
 
-  function updateBalance(id, balance) {
+  function updateBalance(balance) {
     setFriends(
-      friends.map((friend, i) =>
-        i === id ? { ...friend, balance: friend.balance + balance } : friend
+      friends.map((friend) =>
+        friend.id === openFriend.id
+          ? { ...friend, balance: friend.balance + balance }
+          : friend
       )
     );
   }
@@ -46,10 +51,9 @@ export default function App() {
       />
       {openFriend !== null && (
         <BillForm
-          friends={friends}
           openFriend={openFriend}
           onOpenFriend={setOpenFriend}
-          updateBalance={updateBalance}
+          onUpdateBalance={updateBalance}
         />
       )}
     </div>

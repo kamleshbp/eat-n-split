@@ -10,13 +10,12 @@ export default function FriendList({
   return (
     <div className="sidebar">
       <ul>
-        {friends.map((friend, i) => (
+        {friends.map((friend) => (
           <Friend
+            friend={friend}
             openFriend={openFriend}
             onOpenFriend={onOpenFriend}
-            friend={friend}
-            id={i}
-            key={i}
+            key={friend.id}
           />
         ))}
       </ul>

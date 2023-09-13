@@ -12,9 +12,14 @@ export default function AddFriend({ onAddFriend }) {
 
   function addFriend(e) {
     e.preventDefault();
+
+    if (!name || !imageUrl) return;
+
+    const id = crypto.randomUUID();
     const friend = {
-      name: e.target.name.value,
-      imageUrl: e.target.url.value,
+      id,
+      name,
+      imageUrl: imageUrl + `?${id}`,
       balance: 0,
     };
     onAddFriend(friend);
@@ -28,15 +33,12 @@ export default function AddFriend({ onAddFriend }) {
         <label>👫Friend name</label>
         <input
           type="text"
-          name="name"
           value={name}
-          required
           onChange={(e) => setName(e.target.value)}
         />
         <label>🌄 Image URL</label>
         <input
           type="text"
-          name="url"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
